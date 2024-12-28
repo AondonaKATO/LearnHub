@@ -82,19 +82,177 @@ footer {
     background-color: rgba(0, 0, 0, 0.5);
 }
     </style>
-</head>
-<body>
-    <div id="canvas-container"></div>
-    <div class="content">
-        <header>
-            <h2>LearnHub</h2>
-            <nav>
-                <a href="#home">Home</a>
-                <a href="courses.html">Courses</a>
-                <a href="#contact">Contact</a>
-                <a href="inde.html">Sign Up</a>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css"> 
+        <style>
+            /* Custom CSS for responsive icon sizes */
+            .footer-social {
+                text-align: center;
+                margin-top: 20px;
+            }
+    
+            .footer-social a {
+                text-decoration: none;
+                margin: 0 10px;
+                color: #000;
+            }
+    
+            .footer-social i {
+                transition: transform 0.2s ease;
+            }
+    
+            /* Default size for large screens */
+            .footer-social a {
+                font-size: 30px;
+            }
+    
+            /* Medium screens (tablets) */
+            @media (max-width: 768px) {
+                .footer-social a {
+                    font-size: 25px;
+                }
+            }
+    
+            /* Small screens (mobile) */
+            @media (max-width: 480px) {
+                .footer-social a {
+                    font-size: 20px;
+                }
+            }
+    
+            .footer-social a:hover {
+                transform: scale(1.1);
+            }
+
+            .logo {
+    width: 100px;
+    border-radius: 30%;
+    height: auto;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+.nav {
+    display: flex; /* Flexbox for the nav */
+}
+
+.nav.active {
+    display: block;
+}
+.nav-links {
+    list-style: none; /* Remove bullets */
+    display: flex; /* Flexbox for nav items */
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px; /* Space between links */
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #f9826c; /* Highlight linked color on hover */
+}
+
+
+/* Mobile Menu Styles */
+.menu-toggle {
+    display: none; /* Hide by default */
+    flex-direction: column; /* Stack the lines */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.bar {
+    height: 3px;
+    width: 25px;
+    background-color: #ffffff;
+    margin: 3px 0; /* Space between bars */
+}
+
+
+/* Ensure Bootstrap Navbar works as intended */
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #f9826c !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .nav {
+        display: none; /* Hide main nav by default */
+        width: 100%; /* Full width when shown */
+    }
+
+    .nav.active {
+        display: flex; /* Show on mobile toggle */
+        flex-direction: column; /* Stack vertically */
+        position: absolute; /* Overlay on the header */
+        top: 60px; /* Position below header */
+        left: 0;
+        background-color: #f9826c; /* Match header background */
+        z-index: 1; /* Layering */
+    }
+
+    .menu-toggle {
+        display: flex; /* Show mobile menu toggle */
+    }
+
+    .nav-link {
+        padding: 15px;
+        margin: 0; /* No side margin for mobile */
+    }
+}
+
+
+        </style>
+    </head>
+    <body>
+    
+        <header class="header">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="index.html">
+                    <img class="logo" src="logo1.png" alt="Nobles' Academy">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="inde.html">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="courses.html">Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </header>
+        
+    <div id="canvas-container"></div>
+    <div class="content">
         <section class="hero">
             <h1>Unlock Your Potential with LearnHub</h1>
             <p>Embark on a transformative 3D learning journey with our cutting-edge online courses.</p>
@@ -174,6 +332,17 @@ footer {
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
     </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="script.js"></script>
+        <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registered successfully.'))
+        .catch(err => console.error('Service Worker registration failed:', err));
+    }
+  </script>
 </body>
 </html>
-
