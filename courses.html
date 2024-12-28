@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to shared CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Icons -->
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: #004aad;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: #004aad;
+        }
+
+        /* Course Grid Styles */
+        .course-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            max-width: 1200px;
+            margin: 0 auto; /* Center grid on larger screens */
+        }
+
+        .course-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .course-card h3 {
+            color: #004aad;
+            margin-bottom: 1rem;
+        }
+
+        .course-card p {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .course-card button {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            background: #004aad;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .course-card button:hover {
+            background: #00367d;
+        }
+
+        /* Footer */
+        footer {
+            background: #f1f1f1;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Our Courses</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="teachers.html">Teachers</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Available Courses</h2>
+            <div class="course-grid">
+                <div class="course-card">
+                    <h3>Web Development</h3>
+                    <p>Learn HTML, CSS, and JavaScript to build modern websites.</p>
+                    <button>View Details</button>
+                </div>
+                <div class="course-card">
+                    <h3>Data Science</h3>
+                    <p>Master Python, R, and machine learning techniques.</p>
+                    <button>View Details</button>
+                </div>
+                <div class="course-card">
+                    <h3>Graphic Design</h3>
+                    <p>Design stunning visuals with Adobe Creative Suite.</p>
+                    <button>View Details</button>
+                </div>
+                <div class="course-card">
+                    <h3>Digital Marketing</h3>
+                    <p>Learn SEO, PPC, and social media strategies.</p>
+                    <button>View Details</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LearnHub. All rights reserved.</p>
+    </footer>
+</body>
+</html>
