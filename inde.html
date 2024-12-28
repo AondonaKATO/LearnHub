@@ -62,7 +62,7 @@
         // Monnify Payment Integration
         document.getElementById('monnifyPaymentButton').addEventListener('click', function() {
             MonnifySDK.initialize({
-                amount: 200.00, // Payment amount in Naira
+                amount: 100000.00, // Payment amount in Naira
                 currency: "NGN",
                 reference: "REF" + Math.floor(Math.random() * 1000000000), // Unique transaction reference
                 customerName: document.getElementById('name').value, // Customer's name
@@ -90,7 +90,7 @@
             var handler = PaystackPop.setup({
                 key: 'YOUR_PAYSTACK_PUBLIC_KEY', // Replace with your Paystack public key
                 email: document.getElementById('email').value, // Customer's email
-                amount: 10000, // Amount in kobo (e.g., 100 NGN = 10000 kobo)
+                amount: 100000, // Amount in kobo (e.g., 100 NGN = 10000 kobo)
                 currency: 'NGN',
                 callback: function(response) {
                     alert('Payment successful! Transaction reference: ' + response.reference);
