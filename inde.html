@@ -28,7 +28,7 @@
 
     <section id="payment" style="display: none;">
         <h2>Make Payment</h2>
-        <p>Amount: $50</p>
+        <p>Amount: $100</p>
         <div id="paypal-button-container"></div>
     </section>
 
@@ -52,7 +52,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '1.00' // Payment amount
+                            value: '100.00' // Payment amount
                         }
                     }]
                 });
