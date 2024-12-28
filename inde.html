@@ -62,7 +62,7 @@
         // Monnify Payment Integration
         document.getElementById('monnifyPaymentButton').addEventListener('click', function() {
             MonnifySDK.initialize({
-                amount: 100000.00, // Payment amount in Naira
+                amount: 200.00, // Payment amount in Naira
                 currency: "NGN",
                 reference: "REF" + Math.floor(Math.random() * 1000000000), // Unique transaction reference
                 customerName: document.getElementById('name').value, // Customer's name
