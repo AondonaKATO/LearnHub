@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Signup</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file -->
+    <script src="https://www.paypal.com/sdk/js?client-id=Ad5UM-Cc4LVRkUzX9XnbC7sDUDdxXRK9Ax_eyha32kiVA7WZyMcwOeevnlGMwyBLZeuTI-cKIULxxCnY&currency=USD"></script> <!-- PayPal SDK -->
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Course</h1>
+        <p>Sign up, make a payment, and join our learning group!</p>
+    </header>
+
+    <section id="signup">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="submit">Continue to Payment</button>
+        </form>
+    </section>
+
+    <section id="payment" style="display: none;">
+        <h2>Make Payment</h2>
+        <p>Amount: $50</p>
+        <div id="paypal-button-container"></div>
+    </section>
+
+    <section id="confirmation" style="display: none;">
+        <h2>Thank You!</h2>
+        <p>Your payment was successful. Click below to join the learning group:</p>
+        <a href="https://example.com/learning-group" target="_blank">Join Learning Group</a>
+    </section>
+
+    <script>
+        // Form submission handler
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent page reload
+            document.getElementById('signup').style.display = 'none';
+            document.getElementById('payment').style.display = 'block';
+        });
+
+        // PayPal button rendering
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '1.00' // Payment amount
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Payment successful! Thank you, ' + details.payer.name.given_name + '.');
+                    document.getElementById('payment').style.display = 'none';
+                    document.getElementById('confirmation').style.display = 'block';
+                });
+            },
+            onError: function(err) {
+                alert('An error occurred during the payment process. Please try again.');
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+</html>
