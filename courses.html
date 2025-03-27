@@ -244,11 +244,16 @@ function showModal(title, description, isFull) {
     document.getElementById('fullNotice').style.display = isFull ? 'block' : 'none';
     document.getElementById('registerLink').style.display = isFull ? 'none' : 'inline-block';
 
-    // Correctly pass the selected course title in the URL
-    document.getElementById('registerLink').href = `inde.html?course=${encodeURIComponent(title)}`;
+    // Pass selected course title in the URL
+    document.getElementById('registerLink').href = `register.html?course=${encodeURIComponent(title)}`;
 
     document.getElementById('courseModal').style.display = 'flex';
 }
+
+function closeModal() {
+    document.getElementById('courseModal').style.display = 'none';
+}
+
 
     </script>
 </body>
