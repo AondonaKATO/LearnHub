@@ -25,18 +25,21 @@
          </header>
  
  
-     <section id="signup">
-         <h2>Sign Up</h2>
-         <form id="signupForm">
-             <label for="name">Full Name:</label>
-             <input type="text" id="name" name="name" required>
- 
-             <label for="email">Email Address:</label>
-             <input type="email" id="email" name="email" required>
- 
-             <button type="submit">Continue to Payment</button>
-         </form>
-     </section>
+         <section id="signup">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+    
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+    
+                <label for="course">Course:</label>
+                <input type="text" id="course" name="course" readonly> <!-- Uneditable course field -->
+    
+                <button type="submit">Continue to Payment</button>
+            </form>
+        </section>
  
     <!-- <section id="payment" style="display: none;">
          <h2>Make Payment</h2>
@@ -59,6 +62,7 @@
          <h2>Thank You!</h2>
          <p>Your payment was successful. Click below to join the learning group:</p>
          <a href="https://example.com/learning-group" target="_blank">Join Learning Group</a>
+         <button onclick="printReceipt()">Print Receipt</button>
      </section>
  
      <script>
@@ -139,5 +143,65 @@
              }
          }).render('#paypal-button-container');
      </script>
+
+  
+<script>
+
+function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const courseName = getQueryParam("course") || "No course selected";
+            document.getElementById("course").value = courseName;
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            document.getElementById('signup').style.display = 'none';
+            document.getElementById('payment').style.display = 'block';
+        });
+
+
+    function sendEmail() {
+       const name = document.getElementById('name').value;
+       const email = document.getElementById('email').value;
+       const course = document.getElementById('course').value;
+       
+       fetch('send_email.php', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ name, email, course })
+       })
+       .then(response => response.json())
+       .then(data => console.log(data))
+       .catch(error => console.error('Error:', error));
+   }
+
+   function printReceipt() {
+       const name = document.getElementById('name').value;
+       const email = document.getElementById('email').value;
+       const course = document.getElementById('course').value;
+       const receiptContent = `
+           <html>
+           <head><title>Payment Receipt</title></head>
+           <body>
+               <h2>Payment Receipt</h2>
+               <p><strong>Name:</strong> ${name}</p>
+               <p><strong>Email:</strong> ${email}</p>
+               <p><strong>Course:</strong> ${course}</p>
+               <p><strong>Amount Paid:</strong> ₦100,000</p>
+               <p>Thank you for your payment!</p>
+           </body>
+           </html>
+       `;
+       const receiptWindow = window.open('', '_blank');
+       receiptWindow.document.write(receiptContent);
+       receiptWindow.document.close();
+       receiptWindow.print();
+   }
+</script>
+
  </body>
  </html>
