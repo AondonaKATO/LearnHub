@@ -245,7 +245,7 @@ function showModal(title, description, isFull) {
     document.getElementById('registerLink').style.display = isFull ? 'none' : 'inline-block';
 
     // Pass selected course title in the URL
-    document.getElementById('registerLink').href = `register.html?course=${encodeURIComponent(title)}`;
+    document.getElementById('registerLink').href = `inde.html?course=${encodeURIComponent(title)}`;
 
     document.getElementById('courseModal').style.display = 'flex';
 }
@@ -253,7 +253,6 @@ function showModal(title, description, isFull) {
 function closeModal() {
     document.getElementById('courseModal').style.display = 'none';
 }
-
 
     </script>
 </body>
