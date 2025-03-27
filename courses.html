@@ -98,6 +98,12 @@
             background: #00367d;
         }
 
+        /* Out of Stock Styles */
+        .out-of-stock {
+            background: #ccc !important;
+            cursor: not-allowed !important;
+        }
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -141,6 +147,29 @@
             color: #00367d;
         }
 
+        .register-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            background: #004aad;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .register-btn:hover {
+            background: #00367d;
+        }
+
+        .full-text {
+            color: red;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
         /* Footer */
         footer {
             background: #f1f1f1;
@@ -158,7 +187,7 @@
             <a href="teachers.html">Teachers</a>
             <a href="about.html">About Us</a>
             <a href="contact.html">Contact</a>
-            <a href="inde.html">Sign Up</a>
+            <a href="register.html">Sign Up</a>
         </nav>
     </header>
 
@@ -166,22 +195,22 @@
         <section>
             <h2>Available Courses</h2>
             <div class="course-grid">
-                <div class="course-card" onclick="showModal('Web Development', 'Learn HTML, CSS, and JavaScript to build modern websites.')">
+                <div class="course-card" onclick="showModal('Web Development', 'Learn HTML, CSS, and JavaScript to build modern websites.', false)">
                     <h3>Web Development</h3>
                     <p>Learn HTML, CSS, and JavaScript to build modern websites.</p>
                     <button>View Details</button>
                 </div>
-                <div class="course-card" onclick="showModal('Data Science', 'Master Python, R, and machine learning techniques.')">
+                <div class="course-card" onclick="showModal('Data Science', 'Master Python, R, and machine learning techniques.', true)">
                     <h3>Data Science</h3>
                     <p>Master Python, R, and machine learning techniques.</p>
-                    <button>View Details</button>
+                    <button class="out-of-stock">Course Full</button>
                 </div>
-                <div class="course-card" onclick="showModal('Graphic Design', 'Design stunning visuals with Adobe Creative Suite.')">
+                <div class="course-card" onclick="showModal('Graphic Design', 'Design stunning visuals with Adobe Creative Suite.', false)">
                     <h3>Graphic Design</h3>
                     <p>Design stunning visuals with Adobe Creative Suite.</p>
                     <button>View Details</button>
                 </div>
-                <div class="course-card" onclick="showModal('Digital Marketing', 'Learn SEO, PPC, and social media strategies.')">
+                <div class="course-card" onclick="showModal('Digital Marketing', 'Learn SEO, PPC, and social media strategies.', false)">
                     <h3>Digital Marketing</h3>
                     <p>Learn SEO, PPC, and social media strategies.</p>
                     <button>View Details</button>
@@ -191,7 +220,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 LearnHub. All rights reserved.</p>
+        <p>&copy; 2025 LearnHub. All rights reserved.</p>
     </footer>
 
     <!-- Modal -->
@@ -200,27 +229,27 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h3 id="modalTitle"></h3>
             <p id="modalDescription"></p>
+            <p id="fullNotice" class="full-text" style="display: none;">Course Full</p>
+            <a id="registerLink" href="inde.html?course=HTML Basics" class="register-btn">Register Now</a>
         </div>
     </div>
 
     <script>
-        function showModal(title, description) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalDescription').textContent = description;
-            document.getElementById('courseModal').style.display = 'flex';
-        }
+function showModal(title, description, isFull) {
+    if (isFull) return;
 
-        function closeModal() {
-            document.getElementById('courseModal').style.display = 'none';
-        }
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalDescription').textContent = description;
 
-        // Close modal if clicked outside content
-        window.onclick = function(event) {
-            let modal = document.getElementById('courseModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        };
+    document.getElementById('fullNotice').style.display = isFull ? 'block' : 'none';
+    document.getElementById('registerLink').style.display = isFull ? 'none' : 'inline-block';
+
+    // Correctly pass the selected course title in the URL
+    document.getElementById('registerLink').href = `inde.html?course=${encodeURIComponent(title)}`;
+
+    document.getElementById('courseModal').style.display = 'flex';
+}
+
     </script>
 </body>
 </html>
