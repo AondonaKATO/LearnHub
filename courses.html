@@ -64,6 +64,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
         }
 
         .course-card:hover {
@@ -97,6 +98,49 @@
             background: #00367d;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
+
+        .modal h3 {
+            color: #004aad;
+            margin-bottom: 1rem;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #004aad;
+        }
+
+        .close:hover {
+            color: #00367d;
+        }
+
         /* Footer */
         footer {
             background: #f1f1f1;
@@ -122,22 +166,22 @@
         <section>
             <h2>Available Courses</h2>
             <div class="course-grid">
-                <div class="course-card">
+                <div class="course-card" onclick="showModal('Web Development', 'Learn HTML, CSS, and JavaScript to build modern websites.')">
                     <h3>Web Development</h3>
                     <p>Learn HTML, CSS, and JavaScript to build modern websites.</p>
                     <button>View Details</button>
                 </div>
-                <div class="course-card">
+                <div class="course-card" onclick="showModal('Data Science', 'Master Python, R, and machine learning techniques.')">
                     <h3>Data Science</h3>
                     <p>Master Python, R, and machine learning techniques.</p>
                     <button>View Details</button>
                 </div>
-                <div class="course-card">
+                <div class="course-card" onclick="showModal('Graphic Design', 'Design stunning visuals with Adobe Creative Suite.')">
                     <h3>Graphic Design</h3>
                     <p>Design stunning visuals with Adobe Creative Suite.</p>
                     <button>View Details</button>
                 </div>
-                <div class="course-card">
+                <div class="course-card" onclick="showModal('Digital Marketing', 'Learn SEO, PPC, and social media strategies.')">
                     <h3>Digital Marketing</h3>
                     <p>Learn SEO, PPC, and social media strategies.</p>
                     <button>View Details</button>
@@ -149,5 +193,34 @@
     <footer>
         <p>&copy; 2024 LearnHub. All rights reserved.</p>
     </footer>
+
+    <!-- Modal -->
+    <div id="courseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(title, description) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('courseModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('courseModal').style.display = 'none';
+        }
+
+        // Close modal if clicked outside content
+        window.onclick = function(event) {
+            let modal = document.getElementById('courseModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
 </body>
 </html>
