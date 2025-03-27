@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Signup</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file -->
-    <script src="https://sdk.monnify.com/plugin/monnify.js"></script> <!-- Monnify SDK -->
-    <script src="https://js.paystack.co/v1/inline.js"></script> <!-- Paystack SDK -->
-    <!-- PayPal SDK -->
-     
-    <script src="https://www.paypal.com/sdk/js?client-id=AZGqImD2wmtHU5SckrQ6FMrC6lSq7ehaN4vqCZsXAJHO1wTePk7iUVv6LvH1pweHsZeo2ifzfbTkMZJf&currency=USD"></script> <!-- PayPal SDK -->
+    <link rel="stylesheet" href="styles.css"> 
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://sdk.monnify.com/plugin/monnify.js"></script> 
+    <script src="https://js.paystack.co/v1/inline.js"></script>  
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
 </head>
 <body>
-        <header>  
+    <header>  
         <h1>Welcome to Our Course</h1>
         <p>Sign up, make a payment, and join our learning group!</p>
         <nav>
@@ -22,8 +21,7 @@
             <a href="contact.html">Contact</a>
             <a href="courses.html">Courses</a>
         </nav>
-        </header>
-   
+    </header>
 
     <section id="signup">
         <h2>Sign Up</h2>
@@ -34,24 +32,17 @@
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" required>
 
+            <label for="course">Course:</label>
+            <input type="text" id="course" name="course" readonly> <!-- Uneditable course field -->
+
             <button type="submit">Continue to Payment</button>
         </form>
     </section>
 
-   <!-- <section id="payment" style="display: none;">
-        <h2>Make Payment</h2>
-        <p>Amount: $100</p>
-        <div id="paypal-button-container"></div>
-    </section>-->
-
     <section id="payment" style="display: none;">
         <h2>Make Payment</h2>
         <p>Amount: ₦100,000</p>
-        <p><em>All Payment Platforms are live</em></p>
-        <p><em>Enable Pop Up for this website</em></p>
-        <button id="monnifyPaymentButton">Pay with Monnify</button>
         <button id="paystackPaymentButton">Pay with Paystack</button>
-        <!-- PayPal Payment Button -->
         <div id="paypal-button-container"></div>
     </section>
 
@@ -62,45 +53,30 @@
     </section>
 
     <script>
+        // Get course from URL parameters and set it to the input field
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const courseName = getQueryParam("course") || "No course selected";
+            document.getElementById("course").value = courseName;
+        });
+
         // Form submission handler
         document.getElementById('signupForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent page reload
+            event.preventDefault(); 
             document.getElementById('signup').style.display = 'none';
             document.getElementById('payment').style.display = 'block';
         });
 
-        // Monnify Payment Integration
-        document.getElementById('monnifyPaymentButton').addEventListener('click', function() {
-            MonnifySDK.initialize({
-                amount: 100000.00, // Payment amount in Naira
-                currency: "NGN",
-                reference: "REF" + Math.floor(Math.random() * 1000000000), // Unique transaction reference
-                customerName: document.getElementById('name').value, // Customer's name
-                customerEmail: document.getElementById('email').value, // Customer's email
-                apiKey: "MK_TEST_H8TSJGZFDN", // Replace with your Monnify API Key
-                contractCode: "2100482480", // Replace with your Monnify Contract Code
-                paymentDescription: "Course Payment",
-                onComplete: function(response) {
-                    if (response.paymentReference) {
-                        alert('Payment successful! Transaction reference: ' + response.paymentReference);
-                        document.getElementById('payment').style.display = 'none';
-                        document.getElementById('confirmation').style.display = 'block';
-                    } else {
-                        alert('Payment not completed. Please try again.');
-                    }
-                },
-                onClose: function() {
-                    alert('Payment window closed. Payment not completed.');
-                }
-            });
-        });
-
-        // Paystack Payment Integration
+        // Paystack Payment
         document.getElementById('paystackPaymentButton').addEventListener('click', function() {
             var handler = PaystackPop.setup({
-                key: 'pk_live_7f19625c635acb208369ad30633503152c8b4855', // Replace with your Paystack public key
-                email: document.getElementById('email').value, // Customer's email
-                amount: 200000, // Amount in kobo (e.g., 100 NGN = 10000 kobo)
+                key: 'YOUR_PAYSTACK_PUBLIC_KEY',
+                email: document.getElementById('email').value, 
+                amount: 100000 * 100, 
                 currency: 'NGN',
                 callback: function(response) {
                     alert('Payment successful! Transaction reference: ' + response.reference);
@@ -114,16 +90,11 @@
             handler.openIframe();
         });
 
-        // PayPal Payment Integration
+        // PayPal Payment
         paypal.Buttons({
             createOrder: function(data, actions) {
                 return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '100.00' // Payment amount in NGN
-                        },
-                        description: 'Course Payment'
-                    }]
+                    purchase_units: [{ amount: { value: '100.00' }, description: 'Course Payment' }]
                 });
             },
             onApprove: function(data, actions) {
