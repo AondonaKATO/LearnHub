@@ -216,6 +216,25 @@ function getQueryParam(param) {
        receiptWindow.print();
    }
 </script>
+  <script>
+   // Extract query params
+const urlParams = new URLSearchParams(window.location.search);
+const course = urlParams.get('course');
+const price = urlParams.get('price');
+
+// Set values to form
+document.getElementById('course').value = course || '';
+
+// Update the price in the payment section dynamically
+if (price) {
+    const amountText = document.querySelector('#payment p');
+    amountText.textContent = `Amount: ₦${parseInt(price).toLocaleString()}`;
+}
+
+// Use the price in payment logic
+let paymentAmount = parseFloat(price) || 100000;
+
+  </script>
 
  </body>
  </html>
