@@ -195,29 +195,34 @@
         <section>
             <h2>Available Courses</h2>
             <div class="course-grid">
-                <div class="course-card" onclick="showModal('Web Development', 'Learn HTML, CSS, and JavaScript to build modern websites.', false)">
+                <div class="course-card" onclick="showModal('Web Development', 'Learn HTML, CSS, and JavaScript to build modern websites.', false, 50000)">
                     <h3>Web Development</h3>
                     <p>Learn HTML, CSS, and JavaScript to build modern websites.</p>
+                    <p><strong>Price: ₦50,000</strong></p>
                     <button>View Details</button>
                 </div>
-                <div class="course-card" onclick="showModal('Data Science', 'Master Python, R, and machine learning techniques.', true)">
+                <div class="course-card" onclick="showModal('Data Science', 'Master Python, R, and machine learning techniques.', true, 150000)">
                     <h3>Data Science</h3>
                     <p>Master Python, R, and machine learning techniques.</p>
+                    <p><strong>Price: ₦150,000</strong></p>
                     <button class="out-of-stock">Course Full</button>
                 </div>
-                <div class="course-card" onclick="showModal('Physics Tutoring Techniques', 'Master the art of explaining physics concepts and engaging students.', true)">
+                <div class="course-card" onclick="showModal('Physics Tutoring Techniques', 'Master the art of explaining physics concepts and engaging students.', true, 70000)">
                     <h3>Physics Tutoring Techniques</h3>
                     <p>Master the art of explaining physics concepts and engaging students.</p>
+                    <p><strong>Price: ₦70,000</strong></p>
                     <button class="out-of-stock">Course Full</button>
                 </div>
-                <div class="course-card" onclick="showModal('Graphic Design', 'Design stunning visuals with Adobe Creative Suite.', false)">
+                <div class="course-card" onclick="showModal('Graphic Design', 'Design stunning visuals with Adobe Creative Suite.', false, 45000)">
                     <h3>Graphic Design</h3>
                     <p>Design stunning visuals with Adobe Creative Suite.</p>
+                    <p><strong>Price: ₦45,000</strong></p>
                     <button>View Details</button>
                 </div>
-                <div class="course-card" onclick="showModal('Digital Marketing', 'Learn SEO, PPC, and social media strategies.', false)">
+                <div class="course-card" onclick="showModal('Digital Marketing', 'Learn SEO, PPC, and social media strategies.', false, 15000)">
                     <h3>Digital Marketing</h3>
                     <p>Learn SEO, PPC, and social media strategies.</p>
+                    <p><strong>Price: ₦15,000</strong></p>
                     <button>View Details</button>
                 </div>
             </div>
@@ -240,7 +245,7 @@
     </div>
 
     <script>
-function showModal(title, description, isFull) {
+/*function showModal(title, description, isFull) {
     if (isFull) return;
 
     document.getElementById('modalTitle').textContent = title;
@@ -253,7 +258,23 @@ function showModal(title, description, isFull) {
     document.getElementById('registerLink').href = `inde.html?course=${encodeURIComponent(title)}`;
 
     document.getElementById('courseModal').style.display = 'flex';
+}*/
+
+        function showModal(title, description, isFull, price) {
+    if (isFull) return;
+
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalDescription').textContent = description;
+
+    document.getElementById('fullNotice').style.display = isFull ? 'block' : 'none';
+    document.getElementById('registerLink').style.display = isFull ? 'none' : 'inline-block';
+
+    // Pass course and price to inde.html
+    document.getElementById('registerLink').href = `inde.html?course=${encodeURIComponent(title)}&price=${price}`;
+
+    document.getElementById('courseModal').style.display = 'flex';
 }
+
 
 function closeModal() {
     document.getElementById('courseModal').style.display = 'none';
