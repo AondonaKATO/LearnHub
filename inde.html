@@ -76,7 +76,8 @@
          // Monnify Payment Integration
          document.getElementById('monnifyPaymentButton').addEventListener('click', function() {
              MonnifySDK.initialize({
-                 amount: 100000.00, // Payment amount in Naira
+                 //amount: 100000.00, // Payment amount in Naira
+                 amount: paymentAmount,
                  currency: "NGN",
                  reference: "REF" + Math.floor(Math.random() * 1000000000), // Unique transaction reference
                  customerName: document.getElementById('name').value, // Customer's name
@@ -99,13 +100,12 @@
              });
          });
  
-         // Paystack Payment Integration
+         /*/ Paystack Payment Integration
          document.getElementById('paystackPaymentButton').addEventListener('click', function() {
              var handler = PaystackPop.setup({
                  key: 'pk_live_7f19625c635acb208369ad30633503152c8b4855', // Replace with your Paystack public key
                  email: document.getElementById('email').value, // Customer's email
-                 amount: 10000000, // Amount in kobo (e.g., 100 NGN = 10000 kobo)
-                 amount: 200000, // Amount in kobo (e.g., 100 NGN = 10000 kobo)
+                 amount: paymentAmount,
                  currency: 'NGN',
                  callback: function(response) {
                      alert('Payment successful! Transaction reference: ' + response.reference);
@@ -117,7 +117,7 @@
                  }
              });
              handler.openIframe();
-         });
+         }); 
  
          // PayPal Payment Integration
          paypal.Buttons({
@@ -141,7 +141,7 @@
              onError: function(err) {
                  alert('Error: ' + err);
              }
-         }).render('#paypal-button-container');
+         }).render('#paypal-button-container');*/
      </script>
 
   
