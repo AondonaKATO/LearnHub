@@ -74,7 +74,7 @@
              document.getElementById('payment').style.display = 'block';
          });
  
-         // Monnify Payment Integration
+         /*/ Monnify Payment Integration
          document.getElementById('monnifyPaymentButton').addEventListener('click', function() {
              MonnifySDK.initialize({
                  //amount: 100000.00, // Payment amount in Naira
@@ -101,7 +101,7 @@
              });
          });
  
-         /*/ Paystack Payment Integration
+         // Paystack Payment Integration
          document.getElementById('paystackPaymentButton').addEventListener('click', function() {
              var handler = PaystackPop.setup({
                  key: 'pk_live_7f19625c635acb208369ad30633503152c8b4855', // Replace with your Paystack public key
@@ -120,7 +120,7 @@
              handler.openIframe();
          }); 
  */
-         // PayPal Payment Integration
+         /*/ PayPal Payment Integration
          paypal.Buttons({
              createOrder: function(data, actions) {
                  return actions.order.create({
@@ -143,10 +143,42 @@
              onError: function(err) {
                  alert('Error: ' + err);
              }
-         }).render('#paypal-button-container');
+         }).render('#paypal-button-container');*/
      </script>
 
-  
+  //Paypal
+  <script>
+paypal.Buttons({
+  createOrder: function(data, actions) {
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          value: '2.00',        // 💲 Amount in USD
+          currency_code: 'USD'  // Currency
+        },
+        description: 'Course Payment'
+      }]
+    });
+  },
+
+  onApprove: function(data, actions) {
+    return actions.order.capture().then(function(details) {
+      alert('✅ Payment successful! Transaction ID: ' + details.id);
+
+      // Optional: Display a receipt or redirect user
+      document.getElementById('payment').style.display = 'none';
+      document.getElementById('confirmation').style.display = 'block';
+    });
+  },
+
+  onError: function(err) {
+    console.error(err);
+    alert('❌ Payment failed: ' + err);
+  }
+
+}).render('#paypal-button-container');
+</script>
+
 <script>
 
 function getQueryParam(param) {
